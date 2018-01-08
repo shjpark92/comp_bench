@@ -1,0 +1,8 @@
+[submodule "zlib"]
+	path = zlib
+	url = git@github.com:cloudflare/zlib.git
+	branch = gcc.amd64
+[submodule "brotli"]
+	path = brotli
+	url = git@github.com:google/brotli.git
+	branch = master

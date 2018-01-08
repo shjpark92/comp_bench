@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title>Cloudflare Blog</title>
+    <meta name="description" content="" />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msvalidate.01" content="CF295E1604697F9CAD18B5A232E871F6" />
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?v=2c05f940a2">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/assets/images/apple-touch-icon-57x57-precomposed.png?v=2c05f940a2" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/images/apple-touch-icon-72x72-precomposed.png?v=2c05f940a2" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/images/apple-touch-icon-114x114-precomposed.png?v=2c05f940a2" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/apple-touch-icon-144x144-precomposed.png?v=2c05f940a2" />
+
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css?v=2c05f940a2" />
+    <!--[if lt IE 9]><link rel="stylesheet" type="text/css" href="/assets/css/ie.css?v=2c05f940a2" /><![endif]-->
+
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,300,600" rel="stylesheet" type="text/css">-->
+
+    <script>(function(G,o,O,g,l){G.GoogleAnalyticsObject=O;G[O]||(G[O]=function(){(G[O].q=G[O].q||[]).push(arguments)});G[O].l=+new Date;g=o.createElement('script'),l=o.scripts[0];g.src='//www.google-analytics.com/analytics.js';l.parentNode.insertBefore(g,l)}(this,document,'ga'));ga('create','UA-10218544-12', 'auto');ga('send','pageview')</script>
+
+    <link rel="canonical" href="http://blog.cloudflare.com/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="next" href="https://blog.cloudflare.com/page/2/" />
+    
+    <meta property="og:site_name" content="Cloudflare Blog" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Cloudflare Blog" />
+    <meta property="og:url" content="http://blog.cloudflare.com/" />
+    <meta property="og:image" content="http://blog.cloudflare.com/content/images/2016/09/logo-for-blog_thumb-1.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/Cloudflare" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cloudflare Blog" />
+    <meta name="twitter:url" content="http://blog.cloudflare.com/" />
+    <meta name="twitter:image" content="http://blog.cloudflare.com/content/images/2016/09/logo-for-blog_thumb-1.png" />
+    <meta name="twitter:site" content="@cloudflare" />
+    <meta property="og:image:width" content="189" />
+    <meta property="og:image:height" content="47" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cloudflare Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://blog.cloudflare.com/content/images/2016/09/logo-for-blog_thumb.png",
+            "width": 189,
+            "height": 47
+        }
+    },
+    "url": "https://blog.cloudflare.com/",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://blog.cloudflare.com/content/images/2016/09/logo-for-blog_thumb-1.png",
+        "width": 189,
+        "height": 47
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://blog.cloudflare.com"
+    }
+}
+    </script>
+
+    <script type="text/javascript" src="/shared/ghost-url.min.js?v=2c05f940a2"></script>
+<script type="text/javascript">
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "cf0df60d1ab4"
+});
+</script>
+    <meta name="generator" content="Ghost 0.11" />
+    <link rel="alternate" type="application/rss+xml" title="Cloudflare Blog" href="https://blog.cloudflare.com/rss/" />
+    <meta name="msvalidate.01" content="CF295E1604697F9CAD18B5A232E871F6" />
+<meta class="swiftype" name="language" data-type="string" content="en" />
+<script type="text/javascript">
+  (function() {
+    var didInit = false;
+    function initMunchkin() {
+      if(didInit === false) {
+        didInit = true;
+        Munchkin.init('713-XSC-918');
+      }
+    }
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '//munchkin.marketo.net/munchkin.js';
+    s.onreadystatechange = function() {
+      if (this.readyState == 'complete' || this.readyState == 'loaded') {
+        initMunchkin();
+      }
+    };
+    s.onload = initMunchkin;
+    document.getElementsByTagName('head')[0].appendChild(s);
+  })();
+</script>
+<script type="text/javascript" src="https://blog.cloudflare.com/assets/js/jquery.fitvids.js" async=""></script>
+<script type="text/javascript" src="https://blog.cloudflare.com/shared/ghost-url.js" async=""></script>
+<script type="text/javascript" src="//cdn.bizible.com/scripts/bizible.js" async=""></script>
+<script>
+var trackRecruitingLink = function(role, url) {
+   ga('send', 'event', 'recruiting', 'jobscore-click', role, {
+     'transport': 'beacon',
+     'hitCallback': function(){document.location = url;}
+   });
+}
+</script> 
+<script>
+var HTMLAttrToAdd = document.querySelector("html");
+HTMLAttrToAdd.setAttribute("lang", "en");
+</script>
+<style>
+    table {
+        background-color: transparent;
+    }
+    td {
+		padding: 5px 1em;
+    }
+    pre {
+        max-height: 500px;
+        overflow-y: scroll;
+    }
+</style>
+<link href="https://dl.dropbox.com/s/ydog96hxtmwn06i/cf-blog3.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.1/themes/prism.min.css" rel="stylesheet">
+
+    <style>
+        .st-default-search-input {
+            font-family: Helvetica, Arial, "Lucida Grande", sans-serif;
+            font-size: 14px;
+            line-height: 16px;
+            font-weight: 400;
+            -moz-transition: opacity 0.2s;
+            -o-transition: opacity 0.2s;
+            -webkit-transition: opacity 0.2s;
+            transition: opacity 0.2s;
+            display: inline-block;
+            width: 190px;
+            height: 16px;
+            padding: 7px 11px 7px 28px;
+            border: 1px solid rgba(0, 0, 0, 0.25);
+            color: #444;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            background: #fff 8px 8px no-repeat url("data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6%2BR8AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAG11AABzoAAA%2FN0AAINkAABw6AAA7GgAADA%2BAAAQkOTsmeoAAAESSURBVHjajNCxS9VRGMbxz71E4OwgoXPQxVEpXCI47%2BZqGP0LCoJO7UVD3QZzb3SwcHB7F3Uw3Zpd%2FAPCcJKG7Dj4u%2FK7Pwp94HDg5Xyf5z1Pr9YKImKANTzFXxzjU2ae6qhXaxURr%2FAFl9hHDy%2FwEK8z89sYVEp5gh84wMvMvGiSJ%2FEV85jNzLMR1McqfmN5BEBmnmMJFSvtpH7jdJiZv7q7Z%2BZPfMdcF6rN%2FT%2F1m2LGBkd4HhFT3dcRMY2FpskxaLNpayciHrWAGeziD7b%2BVfkithuTk8bkGa4wgWFmbrSTZOYeBvjc%2BucQj%2FEe6xHx4Taq1nrnKaW8K6XUUsrHWuvNevdRRLzFGwzvDbXAB9cDAHvhedDruuxSAAAAAElFTkSuQmCC")
+        }
+
+        .st-ui-close-button {
+            -moz-transition: none;
+            -o-transition: none;
+            -webkit-transition: none;
+            transition: none
+        }
+    </style>
+</head>
+<body class="home-template">
+<div id="fb-root"></div>
+<header id="header" class="header">
+    <div class="wrapper">
+        <a href="https://www.cloudflare.com" class="logo logo-header">Cloudflare</a>
+        <nav id="main-menu" class="header-navigation navigation" role="navigation">
+            <ul class="menu menu-header">
+                <li><a href="https://blog.cloudflare.com/">Blog home</a></li>
+                <li><a href="https://www.cloudflare.com/overview" tabindex="1">What we do</a></li>
+                <li><a href="https://www.cloudflare.com/support" tabindex="9">Support</a></li>
+                <li><a href="https://www.cloudflare.com/community" tabindex="9">Community</a></li>
+                <li><a href="https://www.cloudflare.com/login" tabindex="10">Login</a></li>
+                <li><a href="https://www.cloudflare.com/sign-up" class="btn btn-success" tabindex="11">Sign up</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="wrapper reverse-sidebar">
+    <section class="primary-content" role="main">
+
+        
+
+<article class="post tag-apps-tag tag-developers tag-best-practices tag-cloudflare-apps tag-seo tag-community tag-marketing">
+    <header class="post-header">
+        <h2 class="title"><a href="/5-strategies-to-best-promote-your-app/">5 Strategies to Promote Your App</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 27th, 2017 5:30PM">October 27th, 2017 5:30PM</time>
+            by <a href="/author/andrew/">Andrew Fitch</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>Brady Gentile from Cloudflare's product team wrote an App Developer Playbook, embedded within the developer documentation page. He decided to write it after he and his team conducted several app developer interviews, finding that many developers wanted to learn how to better promote their apps. They wanted to help app authors out in the areas outside of developer core expertise. Social media posting, community outreach, email deployment, SEO,&hellip;</p>
+    </div>
+    <footer>
+        <a href="/5-strategies-to-best-promote-your-app/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/5-strategies-to-best-promote-your-app/#disqus_thread">Comments</a> | tagged with <a href="/tag/apps-tag/">Apps</a>, <a href="/tag/developers/">Developers</a>, <a href="/tag/best-practices/">Best Practices</a>, <a href="/tag/cloudflare-apps/">Cloudflare Apps</a>, <a href="/tag/seo/">SEO</a>, <a href="/tag/community/">Community</a>, <a href="/tag/marketing/">marketing</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<article class="post tag-google-cloud tag-analytics tag-logs">
+    <header class="post-header">
+        <h2 class="title"><a href="/using-google-cloud-platform-to-analyze-cloudflare-logs/">Using Google Cloud Platform to Analyze Cloudflare Logs</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 26th, 2017 5:54PM">October 26th, 2017 5:54PM</time>
+            by <a href="/author/kamilla-amirova/">Kamilla Amirova</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>We’re excited to announce that we now offer deep insights into your domain’s web traffic, working with Google Cloud Platform (GCP). While Cloudflare Enterprise customers always have had access to their logs, they previously had to rely on their own tools to process them, adding extra complexity and cost.  Cloudflare logs provide real time insight into traffic, malicious activity, attack incidents, and infrastructure health checks. The&hellip;</p>
+    </div>
+    <footer>
+        <a href="/using-google-cloud-platform-to-analyze-cloudflare-logs/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/using-google-cloud-platform-to-analyze-cloudflare-logs/#disqus_thread">Comments</a> | tagged with <a href="/tag/google-cloud/">Google Cloud</a>, <a href="/tag/analytics/">Analytics</a>, <a href="/tag/logs/">Logs</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<article class="post tag-cloudflare-apps tag-developers tag-best-practices tag-apps-tag">
+    <header class="post-header">
+        <h2 class="title"><a href="/spotify-highlight/">Spotify&#x27;s Cloudflare App is open source: fork it for your next project</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 25th, 2017 5:00PM">October 25th, 2017 5:00PM</time>
+            by <a href="/author/andrew/">Andrew Fitch</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>Earlier this year, Cloudflare Apps was launched so app developers may leverage our global network of 6 million+ websites, applications, and APIs. I’d like to take a moment to highlight Spotify, which was a launch partner for Cloudflare Apps, especially since they have elected to open source the code to their Cloudflare App. Spotify Github repo &raquo; About Spotify Spotify is the leading digital service for streaming&hellip;</p>
+    </div>
+    <footer>
+        <a href="/spotify-highlight/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/spotify-highlight/#disqus_thread">Comments</a> | tagged with <a href="/tag/cloudflare-apps/">Cloudflare Apps</a>, <a href="/tag/developers/">Developers</a>, <a href="/tag/best-practices/">Best Practices</a>, <a href="/tag/apps-tag/">Apps</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<article class="post tag-linux tag-programming">
+    <header class="post-header">
+        <h2 class="title"><a href="/how-to-monkey-patch-the-linux-kernel/">How to Monkey-Patch the Linux Kernel</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 23rd, 2017 11:28PM">October 23rd, 2017 11:28PM</time>
+            by <a href="/author/kenton-varda/">Kenton Varda</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>I have a weird setup. I type in Dvorak. But, when I hold ctrl or alt, my keyboard reverts to Qwerty. You see, the classic text-editing hotkeys, ctrl+Z, ctrl+X, ctrl+C, and ctrl+V are all located optimally for a Qwerty layout: next to the control key, easy to reach with your left hand while mousing with your right. In Dvorak, unfortunately, these hotkeys are scattered&hellip;</p>
+    </div>
+    <footer>
+        <a href="/how-to-monkey-patch-the-linux-kernel/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/how-to-monkey-patch-the-linux-kernel/#disqus_thread">Comments</a> | tagged with <a href="/tag/linux/">Linux</a>, <a href="/tag/programming/">Programming</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<article class="post tag-nginx tag-developers">
+    <header class="post-header">
+        <h2 class="title"><a href="/the-sad-state-of-linux-socket-balancing/">Why does one NGINX worker take all the load?</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 23rd, 2017 12:57PM">October 23rd, 2017 12:57PM</time>
+            by <a href="/author/marek-majkowski/">Marek Majkowski</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>Scaling up TCP servers is usually straightforward. Most deployments start by using a single process setup. When the need arises more worker processes are added. This is a scalability model for many applications, including HTTP servers like Apache, NGINX or Lighttpd. CC BY-SA 2.0 image by Paul Townsend Increasing the number of worker processes is a great way to overcome a single CPU core bottleneck, but opens&hellip;</p>
+    </div>
+    <footer>
+        <a href="/the-sad-state-of-linux-socket-balancing/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/the-sad-state-of-linux-socket-balancing/#disqus_thread">Comments</a> | tagged with <a href="/tag/nginx/">NGINX</a>, <a href="/tag/developers/">Developers</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<article class="post tag-ssl-tls tag-ssl tag-hsts tag-crypto tag-security tag-https">
+    <header class="post-header">
+        <h2 class="title"><a href="/performing-preventing-ssl-stripping-a-plain-english-primer/">Performing &amp; Preventing SSL Stripping: A Plain-English Primer</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 20th, 2017 4:23PM">October 20th, 2017 4:23PM</time>
+            by <a href="/author/junade-ali/">Junade Ali</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>Over the past few days we learnt about a new attack that posed a serious weakness in the encryption protocol used to secure all modern Wi-Fi networks. The KRACK Attack effectively allows interception of traffic on wireless networks secured by the WPA2 protocol. Whilst it is possible to backward patch implementations to mitigate this vulnerability, security updates are rarely installed universally. Prior to this vulnerability, there were no&hellip;</p>
+    </div>
+    <footer>
+        <a href="/performing-preventing-ssl-stripping-a-plain-english-primer/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/performing-preventing-ssl-stripping-a-plain-english-primer/#disqus_thread">Comments</a> | tagged with <a href="/tag/ssl-tls/">SSL/TLS</a>, <a href="/tag/ssl/">SSL</a>, <a href="/tag/hsts/">hsts</a>, <a href="/tag/crypto/">Crypto</a>, <a href="/tag/security/">Security</a>, <a href="/tag/https/">https</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<article class="post tag-guest-author">
+    <header class="post-header">
+        <h2 class="title"><a href="/helping-to-make-luajit-faster/">Helping to make LuaJIT faster</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 19th, 2017 7:38AM">October 19th, 2017 7:38AM</time>
+            by <a href="/author/guest-author/">Guest Author</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>This is a guest post by Laurence Tratt, who is a programmer and Reader in Software Development in the Department of Informatics at King's College London where he leads the Software Development Team. He is also an EPSRC Fellow. Programming language Virtual Machines (VMs) are familiar beasts: we use them to run apps on our phone, code inside our browsers, and programs on our servers. Traditional VMs are&hellip;</p>
+    </div>
+    <footer>
+        <a href="/helping-to-make-luajit-faster/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/helping-to-make-luajit-faster/#disqus_thread">Comments</a> | tagged with <a href="/tag/guest-author/">Guest Author</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<article class="post tag-careers tag-events tag-cloudflare-team tag-grace-hopper">
+    <header class="post-header">
+        <h2 class="title"><a href="/a-celebration-of-learning-at-grace-hopper/">A Celebration of Learning at Grace Hopper</a></h2>
+        <div class="meta">
+            Published on <time class="meta-date" datetime="October 13th, 2017 3:00PM">October 13th, 2017 3:00PM</time>
+            by <a href="/author/janet-van-huysse/">Janet Van Huysse</a>.
+        </div>
+    </header>
+    <div class="post-excerpt">
+        <p>Photo by Cloudflare Staff Over the course of my career, I’ve been to many conferences, interacted with thousands of candidates, and attended countless keynotes, roundtables, and sessions. I can say without a doubt, that the Grace Hopper Celebration, stood out from the rest. And I think my team would agree.  During the three day event, we screened more than 50 candidates, conducted 24 onsite interviews, and had&hellip;</p>
+    </div>
+    <footer>
+        <a href="/a-celebration-of-learning-at-grace-hopper/" class="more">Read more &raquo; </a><br>
+        <small>
+            <span class="post-meta">
+                <a href="/a-celebration-of-learning-at-grace-hopper/#disqus_thread">Comments</a> | tagged with <a href="/tag/careers/">Careers</a>, <a href="/tag/events/">Events</a>, <a href="/tag/cloudflare-team/">Cloudflare Team</a>, <a href="/tag/grace-hopper/">Grace Hopper</a>
+            </span>
+        </small>
+    </footer>
+</article>
+
+
+
+<section class="clearfix" role="navigation">
+        <a class="newer-posts btn" href="/page/2/">Older &raquo;</a>
+</section>
+
+    </section>
+
+    <aside class="sidebar">
+    <div class="widget">
+      <input type="text" placeholder="Search the blog" class="st-default-search-input"></input>
+      <script type="text/javascript">
+          (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+          (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+          e=d.getElementsByTagName(t)[0];s.async=0;s.src=u;e.parentNode.insertBefore(s,e);
+          })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+        _st('install','_KobMC_zsd_tDx_7NWiX','2.0.0');
+      </script>
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">Cloudflare blog</h4>
+        <p style="margin-top: 20px">
+            <a href="https://www.cloudflare.com/enterprise-service-request" class="btn btn-success" tabindex="11" target="_blank">Contact our team</a>
+        </p>
+        <p>
+            <strong>US callers</strong><br/>
+            1 (888) 99-FLARE <br/>
+            <strong>UK callers</strong><br/>
+            +44 (0)20 3514 6970<br/>
+            <strong>International callers</strong><br/>
+            +1 (650) 319-8930 <BR/><BR/>
+            <a href="https://www.cloudflare.com/plans" target="_blank">Full feature list and plan types</a>
+        </p>
+        <p>Cloudflare provides performance and security for any website. More than 6 million websites use Cloudflare.</p>
+        <p>There is no hardware or software. Cloudflare works at the DNS level. It takes only 5 minutes to sign up. To learn more, please visit our website</p>
+    </div>
+    <div class="widget">
+        <h4 class="widget-title">Cloudflare features</h4>
+        <ul class="menu menu-sidebar">
+            <li><a href="https://www.cloudflare.com/">Overview</a></li>
+            <li><a href="https://www.cloudflare.com/cdn/">CDN</a></li>
+            <li><a href="https://www.cloudflare.com/website-optimization/">Optimizer</a></li>
+            <li><a href="https://www.cloudflare.com/security/">Security</a></li>
+            <li><a href="https://www.cloudflare.com/analytics/">Analytics</a></li>
+            <li><a href="https://www.cloudflare.com/apps">Apps</a></li>
+            <li><a href="https://www.cloudflare.com/network/">Network map</a></li>
+            <li><a href="https://www.cloudflarestatus.com">System status</a></li>
+        </ul>
+    </div>
+    <div id="mc_embed_signup" class="widget">
+        <form action="https://cloudflare.us5.list-manage.com/subscribe/post?u=d80d4d74266c0c044b0bcd7ca&amp;id=8dc0bf9dea" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <input type="email" value="" name="EMAIL" class="width-full required email" id="mce-EMAIL" placeholder="Enter your email address"/>
+            <div id="mce-responses" class="clearfix">
+            <div class="response" id="mce-error-response" style="display:none"></div>
+            <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+            <div class="clearfix">
+                <button type="submit" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary width-full">Sign up for email updates</button>
+            </div>
+        </form>
+    </div>
+</aside>
+</div>
+
+<footer id="footer" class="footer">
+    <div class="wrapper">
+        <nav class="navigation footer-nav">
+            <ul role="navigation">
+                <li id="cf_nav_menu-2" class="footer-column widget_cf_nav_menu">
+                    <h6 class="widget-title">What We Do</h6>
+                    <div class="menu-what-we-do-container">
+                        <ul class="menu menu-footer">
+                            <li><a href="https://www.cloudflare.com/plans">Plans</a></li>
+                            <li><a href="https://www.cloudflare.com/performance/">Performance</a></li>
+                            <li><a href="https://www.cloudflare.com/security/">Security</a></li>
+                            <li><a href="https://www.cloudflare.com/reliability/">Reliability</a></li>
+                            <li><a href="https://www.cloudflare.com/apps">Apps</a></li>
+                            <li><a href="https://www.cloudflare.com/network-map">Network</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="cf_nav_menu-3" class="footer-column widget_cf_nav_menu">
+                    <h6 class="widget-title">Resources</h6>
+                    <div class="menu-support-container">
+                        <ul class="menu menu-footer">
+                            <li><a href="https://www.cloudflare.com/support">Help Center</a></li>
+                            <li><a href="https://www.cloudflare.com/community">Community</a></li>
+                            <li><a href="https://www.cloudflare.com/video">Video Guides</a></li>
+                            <li><a href="https://www.cloudflarestatus.com">System Status</a></li>
+                            <li><a href="https://www.cloudflare.com/contact">Contact Us</a></li>
+
+                            <li class="active"><a href="/">Blog</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="cf_nav_menu-4" class="footer-column widget_cf_nav_menu">
+                    <h6 class="widget-title">Not a Developer?</h6>
+                    <div class="menu-resources-container">
+                        <ul class="menu menu-footer">
+                            <li><a href="https://www.cloudflare.com/case-studies">Case Studies</a></li>
+                            <li><a href="https://www.cloudflare.com/resources/">White Papers</a></li>
+                            <li><a href="https://www.cloudflare.com/internet-summit/">Internet Summit</a></li>
+                            <li><a href="https://www.cloudflare.com/hosting-partners">Partners</a></li>
+                            <li><a href="https://www.cloudflare.com/hosting-partners">Integrations</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="cf_nav_menu-5" class="footer-column widget_cf_nav_menu">
+                    <h6 class="widget-title">About Us</h6>
+                    <div class="menu-about-us-container">
+                        <ul class="menu menu-footer">
+                            <li><a href="https://www.cloudflare.com/people">Our Team</a></li>
+                            <li><a href="https://www.cloudflare.com/join-our-team">Careers</a></li>
+                            <li><a href="https://www.cloudflare.com/press-center">Press</a></li>
+                            <li><a href="https://www.cloudflare.com/terms">Terms of Service</a></li>
+                            <li><a href="https://www.cloudflare.com/security-policy/">Privacy &amp; Security</a></li>
+                            <li><a href="https://www.cloudflare.com/abuse/">Trust &amp; Safety</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li id="cf_nav_menu-6" class="footer-column widget_cf_nav_menu">
+                    <h6 class="widget-title">Connect</h6>
+                    <div class="menu-connect-container">
+                        <ul class="menu menu-footer">
+                            <li><a href="http://twitter.com/cloudflare">Twitter</a></li>
+                            <li><a href="https://www.facebook.com/Cloudflare">Facebook</a></li>
+                            <li><a href="https://www.linkedin.com/company/cloudflare-inc-">LinkedIn</a></li>
+                            <li><a href="https://www.youtube.com/cloudflare-">YouTube</a></li>
+                            <li><a href="https://plus.google.com/+cloudflare/posts">Google+</a></li>
+                            <li><a href="/rss/">RSS</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="credits">All content &copy; 2017 <a href="https://cloudflare.com">Cloudflare</a>. Proudly published with <a href="https://ghost.org">Ghost</a>.</div>
+        </nav>
+    </div>
+</footer>
+
+<script>
+    var links = document.links;
+
+    for (var i = 0, linksLength = links.length; i < linksLength; i++) {  
+       if (links[i].hostname != window.location.hostname) {
+           links[i].target = '_blank';
+       } 
+    } 
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.1/prism.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.fitvids.js?v=2c05f940a2"></script>
+<script type="text/javascript">
+    $(document).ready(function(){ $(".post-content").fitVids(); });
+</script>
+
+<script type="text/javascript">
+
+    var disqus_shortname = 'cloudflare';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+
+</body>
+</html>
