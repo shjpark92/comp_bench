@@ -3,7 +3,7 @@
 #include <argp.h>
 #include <fcntl.h>
 #include <pthread.h>
-#include <stdint.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -197,7 +197,7 @@ int main(int argc, char *argv[]) {
 
   len = s.st_size;
 
-  fprintf(stderr, "Tested file %s; size: %d\n", arguments.file_name, len);
+  fprintf(stderr, "Tested file %s; size: %zu\n", arguments.file_name, len);
   fprintf(stderr, "Threads: %d, alg: %s, quality %d\n", arguments.c,
           arguments.b ? "brotli" : "gzip", arguments.q);
 
@@ -224,7 +224,7 @@ int main(int argc, char *argv[]) {
     total += tasks[i].ctr;
   }
 
-  fprintf(stderr, "Total times compressed: %ld; compressed size: %ld\n", total,
+  fprintf(stderr, "Total times compressed: %"PRId64"; compressed size: %ld\n", total,
           tasks[0].out_size);
   fprintf(stdout, "Compression speed:,%0.2f,MiB\n",
           (double)total * len / 1024 / 1024 / 10);
