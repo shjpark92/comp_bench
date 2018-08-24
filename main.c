@@ -19,6 +19,8 @@
 typedef struct {
   uint8_t *data;
   size_t len;
+  uint8_t *dict;
+  size_t dict_len;
   uint64_t ctr;
   double start_ns;
   size_t out_size;
@@ -32,7 +34,11 @@ static void gzip_bench(compress_task *task) {
   z_stream strm = {0};
   uint8_t null_buf[32768];
 
-  deflateInit2(&strm, task->level, Z_DEFLATED, 15 + 16, 8, Z_DEFAULT_STRATEGY);
+  deflateInit2(&strm, task->level, Z_DEFLATED, 15 /*+ 16*/, 8, Z_DEFAULT_STRATEGY);
+
+  if (task->dict) {
+    deflateSetDictionary(&strm, task->dict, 32768 < task->dict_len ? 32768 : task->dict_len);
+  }
   strm.next_in = task->data;
   strm.avail_in = task->len;
 
@@ -58,6 +64,10 @@ static void gzip_bench(compress_task *task) {
 static void br_bench(compress_task *task) {
   BrotliEncoderState *strm = BrotliEncoderCreateInstance(NULL, NULL, NULL);
   BrotliEncoderSetParameter(strm, BROTLI_PARAM_QUALITY, task->level);
+
+  if (task->dict) {
+    BrotliEncoderSetCustomDictionary(strm, task->dict_len, task->dict);
+  }
 
   size_t available_in;
   const uint8_t *next_in;
@@ -93,11 +103,11 @@ static void br_bench(compress_task *task) {
 }
 
 static void zstd_bench(ZSTD_CStream *strm, compress_task *task) {
-  ZSTD_initCStream(strm, task->level);
 
   size_t total_out = 0;
   uint8_t null_buf[32768];
 
+  ZSTD_resetCStream(strm, ZSTD_CONTENTSIZE_UNKNOWN);
   ZSTD_inBuffer in = (ZSTD_inBuffer){.src = task->data, .size = task->len, .pos = 0};
   ZSTD_outBuffer out = (ZSTD_outBuffer){.dst = null_buf, .size = sizeof(null_buf), .pos = 0};
 
@@ -124,9 +134,16 @@ void *wrapper(void *arg) {
   uint64_t ctr = 0;
 
   ZSTD_CStream *strm = NULL;
- 
+
   if (task->zstd) {
     strm = ZSTD_createCStream();
+    if (task->dict) {
+      ZSTD_CDict *dict = ZSTD_createCDict(task->dict, task->dict_len, task->level);
+      ZSTD_initCStream_usingCDict(strm, dict);
+      ZSTD_CCtx_setParameter(strm, 100 /* ZSTD_p_compressionLevel */, task->level);
+    } else {
+      ZSTD_initCStream(strm, task->level);
+    }
   }
 
   do {
@@ -157,6 +174,7 @@ void *wrapper(void *arg) {
 typedef struct {
   int c, q, d, b, s;
   char *file_name;
+  char *dict_name;
 } cmd_line_options;
 
 const char *argp_program_version = "comp bench 0.0001-alpha";
@@ -173,6 +191,7 @@ static struct argp_option options[] = {
     {"quality", 'q', "quality", 0, "Quality level"},
     {"brotli", 'b', 0, 0, "Benchmark brotli"},
     {"zstd", 's', 0, 0, "Benchmark Zstd"},
+    {"dict", 'd', "dictionary", 0, "Use dictionary"},
     {0}};
 
 static error_t parse_opt(int key, char *arg, struct argp_state *state) {
@@ -189,6 +208,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
     break;
   case 's':
     arguments->s = 1;
+    break;
+  case 'd':
+    arguments->dict_name = arg;
     break;
 
   case ARGP_KEY_ARG:
@@ -218,8 +240,8 @@ int main(int argc, char *argv[]) {
   pthread_t *threads;
   compress_task *tasks;
   int i;
-  uint8_t *buf;
-  size_t len;
+  uint8_t *buf = NULL, *dict = NULL;
+  size_t len, dict_len;
   struct stat s;
   uint64_t total = 0;
   struct timespec start_time;
@@ -233,9 +255,19 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "Error opening %s\n", arguments.file_name);
     return -1;
   }
-  int status = fstat(fd, &s);
-
+  fstat(fd, &s);
   len = s.st_size;
+
+  int dict_fd = 0;
+  if (arguments.dict_name) {
+    dict_fd = open(arguments.dict_name, O_RDONLY);
+    if (dict_fd < 0) {
+      fprintf(stderr, "Error opening %s\n", arguments.dict_name);
+      return -1;
+    }
+    fstat(dict_fd, &s);
+    dict_len = s.st_size;
+  }
 
   char *alg = "gzip";
   if (arguments.b) {
@@ -248,6 +280,9 @@ int main(int argc, char *argv[]) {
   fprintf(stderr, "Threads: %d, alg: %s, quality %d\n", arguments.c, alg, arguments.q);
 
   buf = mmap(0, len, PROT_READ, MAP_PRIVATE, fd, 0);
+  if (dict_fd > 0) {
+    dict = mmap(0, dict_len, PROT_READ, MAP_PRIVATE, dict_fd, 0);
+  }
 
   int nthreads = arguments.c;
   threads = malloc(nthreads * sizeof(pthread_t));
@@ -259,6 +294,8 @@ int main(int argc, char *argv[]) {
   for (i = 0; i < nthreads; i++) {
     tasks[i] = (compress_task){.data = buf,
                                .len = len,
+			       .dict = dict,
+			       .dict_len = dict_len,
                                .brotli = arguments.b,
                                .zstd = arguments.s,
                                .level = arguments.q,
