@@ -14,6 +14,7 @@
 
 #include "brotli/encode.h"
 #include "zlib.h"
+#include "zstd.h"
 
 typedef struct {
   uint8_t *data;
@@ -23,6 +24,7 @@ typedef struct {
   size_t out_size;
   int level;
   int brotli : 1;
+  int zstd: 1;
   int dec : 1;
 } compress_task;
 
@@ -90,11 +92,42 @@ static void br_bench(compress_task *task) {
   BrotliEncoderDestroyInstance(strm);
 }
 
+static void zstd_bench(ZSTD_CStream *strm, compress_task *task) {
+  ZSTD_initCStream(strm, task->level);
+
+  size_t total_out = 0;
+  uint8_t null_buf[32768];
+
+  ZSTD_inBuffer in = (ZSTD_inBuffer){.src = task->data, .size = task->len, .pos = 0};
+  ZSTD_outBuffer out = (ZSTD_outBuffer){.dst = null_buf, .size = sizeof(null_buf), .pos = 0};
+
+  while (in.pos < in.size) {
+    ZSTD_compressStream(strm, &out, &in);
+    total_out += out.pos;
+    out = (ZSTD_outBuffer){.dst = null_buf, .size = sizeof(null_buf), .pos = 0};
+  }
+
+  while (ZSTD_endStream(strm, &out)) {
+    total_out += out.pos;
+    out = (ZSTD_outBuffer){.dst = null_buf, .size = sizeof(null_buf), .pos = 0};
+  }
+
+  total_out += out.pos;
+
+  task->out_size = total_out;
+}
+
 void *wrapper(void *arg) {
   compress_task *task = (compress_task *)arg;
   struct timespec cur_time;
   double start_time_ns = task->start_ns;
   uint64_t ctr = 0;
+
+  ZSTD_CStream *strm = NULL;
+ 
+  if (task->zstd) {
+    strm = ZSTD_createCStream();
+  }
 
   do {
     clock_gettime(CLOCK_MONOTONIC, &cur_time);
@@ -106,6 +139,8 @@ void *wrapper(void *arg) {
 
     if (task->brotli) {
       br_bench(task);
+    } else if (task->zstd) {
+      zstd_bench(strm, task);
     } else {
       gzip_bench(task);
     }
@@ -113,13 +148,14 @@ void *wrapper(void *arg) {
 
   } while (1);
 
+  ZSTD_freeCStream(strm);
   task->ctr = ctr;
 
   return NULL;
 }
 
 typedef struct {
-  int c, q, d, b;
+  int c, q, d, b, s;
   char *file_name;
 } cmd_line_options;
 
@@ -136,6 +172,7 @@ static struct argp_option options[] = {
     {"concurency", 'c', "concurency", 0, "Number of threads"},
     {"quality", 'q', "quality", 0, "Quality level"},
     {"brotli", 'b', 0, 0, "Benchmark brotli"},
+    {"zstd", 's', 0, 0, "Benchmark Zstd"},
     {0}};
 
 static error_t parse_opt(int key, char *arg, struct argp_state *state) {
@@ -149,6 +186,9 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state) {
     break;
   case 'b':
     arguments->b = 1;
+    break;
+  case 's':
+    arguments->s = 1;
     break;
 
   case ARGP_KEY_ARG:
@@ -197,9 +237,15 @@ int main(int argc, char *argv[]) {
 
   len = s.st_size;
 
+  char *alg = "gzip";
+  if (arguments.b) {
+    alg = "brotli";
+  } else if (arguments.s) {
+    alg = "Zstd";
+  }
+
   fprintf(stderr, "Tested file %s; size: %zu\n", arguments.file_name, len);
-  fprintf(stderr, "Threads: %d, alg: %s, quality %d\n", arguments.c,
-          arguments.b ? "brotli" : "gzip", arguments.q);
+  fprintf(stderr, "Threads: %d, alg: %s, quality %d\n", arguments.c, alg, arguments.q);
 
   buf = mmap(0, len, PROT_READ, MAP_PRIVATE, fd, 0);
 
@@ -214,6 +260,7 @@ int main(int argc, char *argv[]) {
     tasks[i] = (compress_task){.data = buf,
                                .len = len,
                                .brotli = arguments.b,
+                               .zstd = arguments.s,
                                .level = arguments.q,
                                .start_ns = start_time_ns};
     pthread_create(&threads[i], NULL, wrapper, &tasks[i]);
